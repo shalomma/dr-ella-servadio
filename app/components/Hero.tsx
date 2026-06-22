@@ -1,114 +1,139 @@
 "use client";
 import { motion } from "framer-motion";
+import { Star, MapPin, CalendarCheck, Phone, Stethoscope } from "lucide-react";
+import Pulse from "./Pulse";
 
-function stagger(i: number) {
-  return { duration: 0.65, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] as const };
+const ease = [0.22, 1, 0.36, 1] as const;
+function rise(i: number) {
+  return {
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, delay: 0.15 + i * 0.09, ease },
+  };
 }
 
 export default function Hero() {
   return (
-    <section className="min-h-screen bg-stone-50 flex items-center pt-20">
-      <div className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-14 items-center">
-        {/* Text */}
-        <div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger(0)}
-            className="text-teal-700 text-sm font-semibold tracking-[0.2em] uppercase mb-5"
-          >
-            Family Medicine Specialist
-          </motion.p>
+    <section className="relative overflow-hidden pt-32 sm:pt-40 pb-20">
+      {/* ambient wash + drifting blobs */}
+      <div className="aura absolute inset-0 -z-10" />
+      <div className="absolute -z-10 top-24 -left-24 w-80 h-80 rounded-full bg-mist blur-3xl opacity-70 blob-drift" />
+      <div className="absolute -z-10 bottom-0 -right-20 w-72 h-72 rounded-full bg-coral/10 blur-3xl blob-drift" />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger(1)}
-            className="font-playfair text-5xl md:text-6xl lg:text-7xl font-bold text-stone-900 leading-[1.1] mb-6"
-          >
-            Dr. Ella<br />Servadio
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger(2)}
-            className="text-stone-500 text-lg leading-relaxed max-w-md mb-10"
-          >
-            Compassionate, comprehensive care for you and your whole family —
-            right in the heart of Givataim.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={stagger(3)}
-            className="flex flex-wrap gap-4"
-          >
-            <a
-              href="#book"
-              className="bg-teal-700 hover:bg-teal-800 text-white px-8 py-3.5 rounded-full font-medium transition-colors"
-            >
-              Book an Appointment
-            </a>
-            <a
-              href="#about"
-              className="border border-stone-300 hover:border-teal-600 text-stone-600 hover:text-teal-700 px-8 py-3.5 rounded-full font-medium transition-colors"
-            >
-              Learn More
-            </a>
-          </motion.div>
-
-          {/* Trust badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-12 flex items-center gap-6 text-sm text-stone-400"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs">✓</span>
-              Maccabi Health Services
+      <div className="max-w-4xl mx-auto px-6 text-center">
+        {/* eyebrow pill */}
+        <motion.div {...rise(0)} className="flex justify-center">
+          <span className="inline-flex items-center gap-2 bg-white border border-line rounded-full pl-2 pr-4 py-1.5 text-sm font-semibold text-slate shadow-sm">
+            <span className="grid place-items-center w-6 h-6 rounded-full bg-mist text-aqua-ink">
+              <Stethoscope size={13} strokeWidth={2.4} />
             </span>
-            <span className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center text-xs">✓</span>
-              No co-pay
+            Family Medicine · Givataim
+          </span>
+        </motion.div>
+
+        {/* headline */}
+        <motion.h1
+          {...rise(1)}
+          className="font-display font-extrabold text-ink leading-[1.08] mt-7 text-xl min-[360px]:text-2xl sm:text-6xl lg:text-7xl"
+        >
+          I&apos;m Dr. Ella Servadio,
+          <br />
+          <span className="relative inline-block">
+            <span className="text-aqua">your family&apos;s doctor.</span>
+            <Pulse className="absolute -bottom-3 left-0 w-full h-4" duration={1.6} />
+          </span>
+        </motion.h1>
+
+        <motion.p
+          {...rise(2)}
+          className="text-slate text-lg leading-relaxed max-w-xl mx-auto mt-9"
+        >
+          Listen first, treat the whole person — not just the symptom.
+          Warm, attentive care for every age, right in the heart of Givataim.
+        </motion.p>
+      </div>
+
+      {/* portrait + flanking chips */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9, delay: 0.45, ease }}
+        className="relative max-w-md mx-auto mt-14 px-6"
+      >
+        {/* coral arch outline behind, for depth */}
+        <div className="absolute inset-x-10 -top-3 bottom-10 rounded-t-[150px] border-2 border-coral/30 -z-10" />
+
+        {/* arch portrait */}
+        <div className="relative mx-auto w-[280px] sm:w-[330px] aspect-[4/5] rounded-t-[150px] rounded-b-[2.25rem] overflow-hidden shadow-[0_30px_60px_-25px_rgba(13,43,43,0.45)]">
+          {/* Replace this block with:
+              <Image src="/doctor.jpg" fill alt="Dr. Ella Servadio" className="object-cover" /> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-mist via-aqua/40 to-aqua-deep" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+            <span className="grid place-items-center w-16 h-16 rounded-full bg-white/90 text-aqua-deep shadow-lg">
+              <Stethoscope size={28} strokeWidth={2} />
             </span>
-          </motion.div>
+            <p className="font-display font-bold text-white text-xl mt-4 drop-shadow-sm">
+              Dr. Ella Servadio
+            </p>
+            <p className="text-white/85 text-xs font-medium mt-1">
+              Add portrait → /doctor.jpg
+            </p>
+          </div>
         </div>
 
-        {/* Photo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
-        >
-          {/* Decorative circle behind */}
-          <div className="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-teal-100 -z-10" />
-          <div className="absolute -bottom-6 -left-6 w-20 h-20 rounded-full bg-amber-100 -z-10" />
-
-          <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-teal-50 relative shadow-xl">
-            {/* Replace this div with <Image src="/doctor.jpg" fill alt="Dr. Ella Servadio" className="object-cover" /> */}
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-100 via-teal-300 to-teal-700 flex flex-col items-center justify-end p-8">
-              <p className="text-white/50 text-xs">[ Doctor photo goes here ]</p>
-            </div>
+        {/* rating chip — top left */}
+        <div className="float-soft absolute -left-1 sm:-left-4 top-10 bg-white rounded-2xl shadow-lg px-4 py-3 text-left">
+          <div className="flex gap-0.5 text-amber mb-1">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <Star key={i} size={13} fill="currentColor" strokeWidth={0} />
+            ))}
           </div>
+          <p className="text-ink text-sm font-bold leading-none">Trusted care</p>
+          <p className="text-slate text-[11px] mt-1">Board-certified</p>
+        </div>
 
-          {/* Floating credential card */}
-          <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-lg px-5 py-4 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-700 shrink-0">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs text-stone-400 leading-none mb-0.5">Certified Specialist</p>
-              <p className="text-sm font-semibold text-stone-800">Family Medicine</p>
-            </div>
+        {/* location chip — top right */}
+        <div className="float-soft-2 absolute -right-1 sm:-right-4 top-24 bg-ink text-white rounded-2xl shadow-lg px-4 py-3 text-left">
+          <div className="flex items-center gap-1.5 text-aqua mb-1">
+            <MapPin size={13} strokeWidth={2.4} />
+            <span className="text-[11px] font-bold uppercase tracking-wide">Maccabi</span>
           </div>
-        </motion.div>
-      </div>
+          <p className="text-sm font-semibold leading-none">Givataim Clinic</p>
+          <p className="text-white/60 text-[11px] mt-1">No co-pay</p>
+        </div>
+
+        {/* segmented Book / Call pill — overlapping bottom */}
+        <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 flex items-center gap-1 bg-white rounded-full p-1.5 shadow-xl border border-line">
+          <a
+            href="#book"
+            className="inline-flex items-center gap-2 bg-aqua hover:bg-aqua-deep text-white text-sm font-bold pl-4 pr-5 py-2.5 rounded-full transition-colors"
+          >
+            <CalendarCheck size={15} strokeWidth={2.4} />
+            Book a visit
+          </a>
+          <a
+            href="tel:035050066"
+            className="inline-flex items-center gap-2 text-ink/70 hover:text-ink text-sm font-semibold px-4 py-2.5 rounded-full transition-colors"
+          >
+            <Phone size={14} strokeWidth={2.4} />
+            Call
+          </a>
+        </div>
+      </motion.div>
+
+      {/* trust strip */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.9 }}
+        className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-20 text-sm text-slate font-medium"
+      >
+        <span>Hebrew &amp; English</span>
+        <span className="w-1 h-1 rounded-full bg-mist-deep" />
+        <span>Maccabi Health Services</span>
+        <span className="w-1 h-1 rounded-full bg-mist-deep" />
+        <span>License 1-145645</span>
+      </motion.div>
     </section>
   );
 }

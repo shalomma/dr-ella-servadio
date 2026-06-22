@@ -1,68 +1,80 @@
 import FadeIn from "./FadeIn";
+import Eyebrow from "./Eyebrow";
+import Pulse from "./Pulse";
+import { Phone, MapPin, Video } from "lucide-react";
 
 const steps = [
   {
-    number: "01",
-    title: "Call or Book Online",
+    Icon: Phone,
+    title: "Call or book online",
     description:
-      "Call Maccabi's central line at *3555, or book online through the Maccabi website or mobile app. Both options let you see available slots instantly.",
+      "Reach Maccabi's central line at *3555, or book through the Maccabi website or app. Both show open slots instantly.",
   },
   {
-    number: "02",
-    title: "Come to the Clinic",
+    Icon: MapPin,
+    title: "Come to the clinic",
     description:
-      "Visit us at Derech Yitzhak Rabin 53, Givataim — Floor 5. The visit is fully covered for Maccabi members, with no co-payment required.",
+      "Visit us at Derech Yitzhak Rabin 53, Givataim — Floor 5. Fully covered for Maccabi members, with no co-payment.",
   },
   {
-    number: "03",
-    title: "Or Meet Remotely",
+    Icon: Video,
+    title: "Or meet remotely",
     description:
-      "Remote video appointments are available for follow-ups and non-urgent concerns. Ask for a remote slot when you book.",
+      "Prefer to stay home? Remote video appointments are available for follow-ups and non-urgent concerns. Just ask.",
   },
 ];
 
 export default function HowToBook() {
   return (
-    <section id="book" className="py-28 bg-teal-800 text-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="book" className="relative py-28 bg-ink text-white overflow-hidden">
+      <div className="aura absolute inset-0 opacity-40 -z-0" />
+      <div className="relative max-w-6xl mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-16">
-            <p className="text-teal-300 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-              Getting Started
-            </p>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold">
-              How to Book
+          <div className="text-center mb-16 flex flex-col items-center">
+            <Eyebrow tone="light">Getting started</Eyebrow>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
+              Three ways in
             </h2>
           </div>
         </FadeIn>
 
+        {/* pulse connector across the steps (desktop) */}
+        <div className="hidden md:block absolute left-0 right-0 px-24 top-[238px]">
+          <Pulse className="w-full h-6" color="var(--color-aqua)" width={2} duration={2} />
+        </div>
+
         <div className="grid md:grid-cols-3 gap-10">
-          {steps.map(({ number, title, description }, i) => (
-            <FadeIn key={number} delay={i * 0.1}>
-              <div className="relative pl-2">
-                <p className="font-playfair text-7xl font-bold text-teal-600/30 leading-none mb-4 select-none">
-                  {number}
-                </p>
-                <h3 className="text-xl font-semibold mb-3">{title}</h3>
-                <p className="text-teal-200 text-sm leading-relaxed">{description}</p>
+          {steps.map(({ Icon, title, description }, i) => (
+            <FadeIn key={title} delay={i * 0.12}>
+              <div className="relative text-center md:text-left">
+                <div className="flex items-center gap-3 justify-center md:justify-start mb-5">
+                  <span className="grid place-items-center w-12 h-12 rounded-2xl bg-aqua text-ink shrink-0">
+                    <Icon size={22} strokeWidth={2} />
+                  </span>
+                  <span className="font-display text-5xl font-extrabold text-white/10 leading-none select-none">
+                    {i + 1}
+                  </span>
+                </div>
+                <h3 className="font-display text-xl font-bold mb-3">{title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{description}</p>
               </div>
             </FadeIn>
           ))}
         </div>
 
         <FadeIn delay={0.35}>
-          <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4 text-center">
+          <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="tel:3555"
-              className="inline-block bg-white text-teal-800 font-semibold px-10 py-4 rounded-full hover:bg-teal-50 transition-colors text-base"
+              className="inline-flex items-center justify-center gap-2 bg-aqua hover:bg-white text-ink font-bold px-9 py-4 rounded-full transition-colors"
             >
-              Call *3555
+              <Phone size={17} strokeWidth={2.4} /> Call *3555
             </a>
             <a
               href="tel:035050066"
-              className="inline-block border border-teal-500 text-white font-semibold px-10 py-4 rounded-full hover:bg-teal-700 transition-colors text-base"
+              className="inline-flex items-center justify-center gap-2 border border-white/25 hover:border-aqua hover:text-aqua text-white font-semibold px-9 py-4 rounded-full transition-colors"
             >
-              Direct: 03-5050066
+              Direct line · 03-5050066
             </a>
           </div>
         </FadeIn>

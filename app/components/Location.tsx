@@ -1,4 +1,5 @@
 import FadeIn from "./FadeIn";
+import Eyebrow from "./Eyebrow";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 const hours = [
@@ -11,17 +12,59 @@ const hours = [
   { day: "Saturday",  hours: "Closed",         open: false },
 ];
 
+const contacts = [
+  {
+    Icon: MapPin,
+    label: "Clinic Address",
+    body: (
+      <>
+        <p className="text-slate text-sm leading-relaxed">
+          Derech Yitzhak Rabin 53, Floor 5<br />
+          Givataim, Israel
+        </p>
+        <a
+          href="https://maps.google.com/?q=Derech+Yitzhak+Rabin+53,+Givataim"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-aqua-ink text-sm font-semibold mt-2 inline-block hover:underline"
+        >
+          Open in Google Maps →
+        </a>
+      </>
+    ),
+  },
+  {
+    Icon: Phone,
+    label: "Phone",
+    body: (
+      <a href="tel:035050066" className="text-slate text-sm hover:text-aqua-ink transition-colors">
+        03-5050066
+      </a>
+    ),
+  },
+  {
+    Icon: Mail,
+    label: "Email",
+    body: (
+      <a
+        href="mailto:mishpaha.giv@gmail.com"
+        className="text-slate text-sm hover:text-aqua-ink transition-colors"
+      >
+        mishpaha.giv@gmail.com
+      </a>
+    ),
+  },
+];
+
 export default function Location() {
   return (
     <section id="location" className="py-28 bg-white">
       <div className="max-w-6xl mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-16">
-            <p className="text-teal-700 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-              Find Us
-            </p>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-stone-900">
-              Location & Hours
+          <div className="text-center mb-16 flex flex-col items-center">
+            <Eyebrow>Find us</Eyebrow>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-ink mt-4">
+              Location &amp; hours
             </h2>
           </div>
         </FadeIn>
@@ -29,63 +72,27 @@ export default function Location() {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Info + Hours */}
           <FadeIn direction="right">
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 mt-0.5">
-                  <MapPin size={18} strokeWidth={1.5} />
+            <div className="space-y-7">
+              {contacts.map(({ Icon, label, body }) => (
+                <div key={label} className="flex gap-4">
+                  <div className="w-11 h-11 rounded-2xl bg-mist text-aqua-ink flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon size={18} strokeWidth={1.8} />
+                  </div>
+                  <div>
+                    <p className="font-display font-bold text-ink mb-1">{label}</p>
+                    {body}
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-stone-800 mb-1">Clinic Address</p>
-                  <p className="text-stone-500 text-sm leading-relaxed">
-                    Derech Yitzhak Rabin 53, Floor 5<br />
-                    Givataim, Israel
-                  </p>
-                  <a
-                    href="https://maps.google.com/?q=Derech+Yitzhak+Rabin+53,+Givataim"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-teal-700 text-sm font-medium mt-2 inline-block hover:underline"
-                  >
-                    Open in Google Maps →
-                  </a>
-                </div>
-              </div>
+              ))}
 
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 mt-0.5">
-                  <Phone size={18} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="font-semibold text-stone-800 mb-1">Phone</p>
-                  <a href="tel:035050066" className="text-stone-500 text-sm hover:text-teal-700 transition-colors">
-                    03-5050066
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center shrink-0 mt-0.5">
-                  <Mail size={18} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="font-semibold text-stone-800 mb-1">Email</p>
-                  <a
-                    href="mailto:mishpaha.giv@gmail.com"
-                    className="text-stone-500 text-sm hover:text-teal-700 transition-colors"
-                  >
-                    mishpaha.giv@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              {/* Hours table */}
-              <div>
-                <p className="font-semibold text-stone-800 mb-3">Office Hours</p>
-                <div className="divide-y divide-stone-100">
+              {/* Hours card */}
+              <div className="rounded-3xl bg-sand border border-line p-6">
+                <p className="font-display font-bold text-ink mb-3">Office Hours</p>
+                <div className="divide-y divide-line">
                   {hours.map(({ day, hours: h, open }) => (
                     <div key={day} className="flex justify-between py-2.5 text-sm">
-                      <span className="text-stone-600">{day}</span>
-                      <span className={open ? "text-teal-700 font-medium" : "text-stone-300"}>
+                      <span className="text-slate">{day}</span>
+                      <span className={open ? "text-aqua-ink font-semibold" : "text-mist-deep"}>
                         {h}
                       </span>
                     </div>
@@ -97,7 +104,7 @@ export default function Location() {
 
           {/* Map */}
           <FadeIn direction="left" delay={0.1}>
-            <div className="rounded-3xl overflow-hidden shadow-md h-[500px] bg-stone-100">
+            <div className="rounded-3xl overflow-hidden shadow-lg h-[540px] bg-mist border border-line">
               <iframe
                 title="Clinic location"
                 src="https://maps.google.com/maps?q=Derech+Yitzhak+Rabin+53,+Givataim,+Israel&output=embed"

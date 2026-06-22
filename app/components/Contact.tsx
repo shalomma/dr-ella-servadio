@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import FadeIn from "./FadeIn";
+import Eyebrow from "./Eyebrow";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -13,39 +14,39 @@ export default function Contact() {
   }
 
   const inputClass =
-    "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-800 placeholder:text-stone-300 focus:outline-none focus:border-teal-500 transition-colors";
+    "w-full border border-line bg-sand rounded-2xl px-4 py-3 text-sm text-ink placeholder:text-slate/50 focus:outline-none focus:border-aqua focus:bg-white transition-colors";
 
   return (
-    <section id="contact" className="py-28 bg-stone-50">
+    <section id="contact" className="py-28 bg-sand">
       <div className="max-w-2xl mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-12">
-            <p className="text-teal-700 text-sm font-semibold tracking-[0.2em] uppercase mb-4">
-              Get in Touch
-            </p>
-            <h2 className="font-playfair text-4xl md:text-5xl font-bold text-stone-900 mb-4">
-              Contact
+          <div className="text-center mb-12 flex flex-col items-center">
+            <Eyebrow>Get in touch</Eyebrow>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-ink mt-4 mb-4">
+              Have a question?
             </h2>
-            <p className="text-stone-400 text-sm">
-              Have a question before booking? Send a message and we'll get back
-              to you shortly.
+            <p className="text-slate text-sm max-w-md">
+              Send a message before booking and we&apos;ll get back to you shortly.
             </p>
           </div>
         </FadeIn>
 
         <FadeIn delay={0.1}>
           {sent ? (
-            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-10 text-center">
-              <p className="text-teal-800 font-semibold text-lg mb-1">
+            <div className="bg-white border border-mist-deep rounded-3xl p-10 text-center shadow-sm">
+              <div className="mx-auto w-12 h-12 rounded-full bg-mist text-aqua-ink grid place-items-center mb-4 text-2xl">
+                ✓
+              </div>
+              <p className="font-display text-ink font-bold text-lg mb-1">
                 Thank you for reaching out!
               </p>
-              <p className="text-teal-600 text-sm">We'll be in touch shortly.</p>
+              <p className="text-slate text-sm">We&apos;ll be in touch shortly.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-sm p-8 space-y-5">
+            <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-[0_18px_50px_-30px_rgba(13,43,43,0.4)] border border-line p-8 space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
+                  <label className="block text-xs font-bold text-slate uppercase tracking-wide mb-1.5">
                     Name
                   </label>
                   <input
@@ -58,7 +59,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
+                  <label className="block text-xs font-bold text-slate uppercase tracking-wide mb-1.5">
                     Email
                   </label>
                   <input
@@ -72,7 +73,7 @@ export default function Contact() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-stone-500 uppercase tracking-wide mb-1.5">
+                <label className="block text-xs font-bold text-slate uppercase tracking-wide mb-1.5">
                   Message
                 </label>
                 <textarea
@@ -86,9 +87,9 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-teal-700 hover:bg-teal-800 text-white py-3.5 rounded-xl font-medium text-sm transition-colors"
+                className="w-full bg-aqua hover:bg-aqua-deep text-white py-3.5 rounded-2xl font-bold text-sm transition-colors"
               >
-                Send Message
+                Send message
               </button>
             </form>
           )}
