@@ -34,7 +34,7 @@ export default function Hero() {
         {/* headline */}
         <motion.h1
           {...rise(1)}
-          className="font-display font-extrabold text-ink leading-[1.08] mt-7 text-xl min-[360px]:text-2xl sm:text-6xl lg:text-7xl"
+          className="font-display font-extrabold text-ink leading-[1.08] mt-7 text-[1.7rem] min-[360px]:text-3xl min-[400px]:text-4xl sm:text-6xl lg:text-7xl"
         >
           I&apos;m Dr. Ella Servadio,
           <br />
@@ -106,7 +106,7 @@ export default function Hero() {
         <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 flex items-center gap-1 bg-white rounded-full p-1.5 shadow-xl border border-line">
           <a
             href="#book"
-            className="inline-flex items-center gap-2 bg-aqua hover:bg-aqua-deep text-white text-sm font-bold pl-4 pr-5 py-2.5 rounded-full transition-colors"
+            className="inline-flex items-center gap-2 bg-aqua hover:bg-aqua-deep text-white text-sm font-bold pl-4 pr-5 py-2.5 rounded-full transition-colors whitespace-nowrap"
           >
             <CalendarCheck size={15} strokeWidth={2.4} />
             Book a visit
@@ -129,9 +129,9 @@ export default function Hero() {
         className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mt-20 text-sm text-slate font-medium"
       >
         <span>Hebrew &amp; English</span>
-        <span className="w-1 h-1 rounded-full bg-mist-deep" />
+        <span className="hidden sm:block w-1 h-1 rounded-full bg-mist-deep" />
         <span>Maccabi Health Services</span>
-        <span className="w-1 h-1 rounded-full bg-mist-deep" />
+        <span className="hidden sm:block w-1 h-1 rounded-full bg-mist-deep" />
         <span>License 1-145645</span>
       </motion.div>
     </section>
